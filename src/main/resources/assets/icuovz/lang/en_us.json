@@ -1,0 +1,18 @@
+{
+	"icuovz.config.block.beacon": "Beacon Render Distance",
+	"icuovz.config.block.beacon.tooltip": "Render distance for the beacon's beam.\nVanilla: 256 blocks",
+
+	"icuovz.config.block.min": "Block-Entity Minimum Render Distance",
+	"icuovz.config.block.min.tooltip": "Renders all block-entities within this range. This will only increase block-entity render distance, not reduce it.\nThe vanilla render distance for most block entities varies between a flat 64 and 100 blocks.",
+
+
+	"icuovz.config.entity.max": "Entity Maximum Render Distance",
+	"icuovz.config.entity.max.tooltip": "Prevents entities beyond this range from being rendered, regardless of their sizes.\nThis overrides all other settings.",
+
+	"icuovz.config.entity.min": "Entity Minimum Render Distance",
+	"icuovz.config.entity.min.tooltip": "Forces entities within this range to be rendered, regardless of their sizes.\nThis value will scale with the FOV if enabled.",
+
+
+	"icuovz.config.fovScaling": "FOV-based scaling",
+	"icuovz.config.fovScaling.tooltip": "Adjusts the render distance when zooming.\nThis scales all settings except for Entity Max."
+}

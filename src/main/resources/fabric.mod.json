@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "i-see-you-over-there",
+	"version": "${version}",
+	"name": "I see you over there!",
+	"description": "Dynamic entity render-distance based on zoom level.",
+	"authors": [
+		"Estecka"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/i-see-you-over-there",
+		"sources": "https://github.com/Estecka/mc-I-See-You-Over-There/"
+	},
+	"license": "MIT",
+	"icon": "assets/icuovz/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"modmenu": [
+			"tk.estecka.icuovz.config.ModMenu"
+		],
+		"main": [
+			"tk.estecka.icuovz.ISeeYouOverThereMod"
+		]
+	},
+	"mixins": [
+		"i-see-you-over-there.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"fabric-api": "*",
+		"java": ">=17"
+	},
+	"recommends": {
+		"minecraft": "^1.19.4"
+	}
+}
