@@ -8,8 +8,8 @@ import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 
 @Unique
-@Mixin(targets={"net/minecraft/server/world/ThreadedAnvilChunkStorage$EntityTracker"})
-public class ThreadedAnvilChunkStorage_EntityTrackerMixin
+@Mixin(targets={"net/minecraft/server/world/ServerChunkLoadingManager$EntityTracker"})
+public class ServerChunkLoadingManager_EntityTrackerMixin
 {
 	@ModifyReturnValue(method="adjustTrackingDistance", at=@At(value="RETURN"))
 	private int ClampMaxTrackingDistance(int original){

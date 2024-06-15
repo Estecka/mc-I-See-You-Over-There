@@ -3,7 +3,7 @@
 	"package": "tk.estecka.icuovz.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ThreadedAnvilChunkStorage_EntityTrackerMixin"
+		"ServerChunkLoadingManager_EntityTrackerMixin"
 	],
 	"client": [
 		"BeaconBlockEntityRendererMixin",
