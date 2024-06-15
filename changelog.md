@@ -3,3 +3,5 @@
 Initial Release
 ### 1.0.1
 - Updated for MC 1.20.5
+### 1.0.2
+- Updated for MC 1.21

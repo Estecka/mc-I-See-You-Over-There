@@ -14,6 +14,11 @@ import net.minecraft.util.math.MathHelper;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 
+/**
+ * Considering moving this logic into the `EntityRendererDispatcher` instead. If
+ * this ever  becomes a problem, this would let the logic  work around potential
+ * overrides in `EntityRenderer` sub-classes.
+ */
 @Unique
 @Mixin(EntityRenderer.class)
 public class EntityRendererMixin<T extends Entity>
@@ -26,7 +31,6 @@ public class EntityRendererMixin<T extends Entity>
 		    ;
 	}
 
-	@Deprecated
 	// Scales render distance by virtually changing the distance from the entity to the camera
 	static private boolean ScaledShouldRender(Entity entity, double camX, double camY, double camZ, Operation<Boolean> original){
 		return original.call(
