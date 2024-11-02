@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/i-see-you-over-there",
-		"sources": "https://github.com/Estecka/mc-I-See-You-Over-There/"
+		"sources": "https://github.com/Estecka/mc-I-See-You-Over-There/",
+		"issues":  "https://github.com/Estecka/mc-I-See-You-Over-There/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/icuovz/icon.png",
@@ -26,7 +27,7 @@
 		"i-see-you-over-there.mixins.json"
 	],
 	"depends": {
-		"minecraft": "~1.21",
+		"minecraft": ">=1.21 <1.21.2",
 		"fabricloader": ">=0.15.10",
 		"fabric-api": "*",
 		"java": ">=21"
