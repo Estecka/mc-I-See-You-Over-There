@@ -1,13 +1,16 @@
 # Minecraft Code Breaking Changes
-### 1.19.4
+## 1.19.4
 Initial Release
 
-### 1.20.5
-#### No Workaround:
+## 1.20.5
+### No Workaround:
 - `GameRenderer::renderWorld` has one less parameter. No code change required, but needs recompilation.
 
-### 1.21.0
+## 1.21.0
 ### No Workaround:
 - `GameRenderer::renderWorld` Now takes a RenderTickCounter. No code change required, but needs recompilation.
-### Possible Workaround:
+### Yarn Mappings ?
 - `ThreadedAnvilChunkStorage` was renamed to `ServerChunkLoadingManager` (Yarn Mapping changes)
+
+## 1.21.2
+- `getFov()` now returns a float instead of a double.

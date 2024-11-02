@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Box;
 
 // Unused mixin
+@Deprecated
 @Mixin(Entity.class)
 public class EntityMixin
 {

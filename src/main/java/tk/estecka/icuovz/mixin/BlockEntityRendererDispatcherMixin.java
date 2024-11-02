@@ -12,6 +12,10 @@ import net.minecraft.util.math.Vec3d;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 
+/**
+ * @deprecated Feature may be dropped in a future release. Is redundant with the
+ * mod "Enhanced Block Entities", which does the same thing but better.
+ */
 @Unique
 @Mixin(BlockEntityRenderDispatcher.class)
 public class BlockEntityRendererDispatcherMixin 

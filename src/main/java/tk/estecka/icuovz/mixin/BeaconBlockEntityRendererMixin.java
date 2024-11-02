@@ -8,6 +8,10 @@ import tk.estecka.icuovz.ISeeYouOverThereMod;
 @Mixin(BeaconBlockEntityRenderer.class)
 public class BeaconBlockEntityRendererMixin 
 {
+	/**
+	 * @author Estecka
+	 * @reason Vanilla method is a dumb constant; nothing to salvage there.
+	 */
 	@Overwrite
 	public int getRenderDistance(){
 		return ISeeYouOverThereMod.CONFIG.beaconBeam;
