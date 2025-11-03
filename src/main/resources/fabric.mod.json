@@ -27,7 +27,7 @@
 		"i-see-you-over-there.mixins.json"
 	],
 	"depends": {
-		"minecraft": "~1.21.10",
+		"minecraft": "~1.21.9",
 		"fabricloader": ">=0.17.2",
 		"fabric-api": "*",
 		"java": ">=21"
