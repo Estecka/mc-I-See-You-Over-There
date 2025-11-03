@@ -14,3 +14,7 @@ Initial Release
 
 ## 1.21.2
 - `getFov()` now returns a float instead of a double.
+
+## 1.21.6
+###	Backward-compatible workaround
+- `getFov()` is now called twice in `GameRenderer.renderWorld`, the second call does not return the zoomed in fov. Use ordinal to target only the first call.
