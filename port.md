@@ -10,7 +10,11 @@ Initial Release
 ### No Workaround:
 - `GameRenderer::renderWorld` Now takes a RenderTickCounter. No code change required, but needs recompilation.
 ### Yarn Mappings ?
-- `ThreadedAnvilChunkStorage` was renamed to `ServerChunkLoadingManager` (Yarn Mapping changes)
+- `ThreadedAnvilChunkStorage` was renamed to `ServerChunkLoadingManager`
 
 ## 1.21.2
 - `getFov()` now returns a float instead of a double.
+
+## 1.21.6
+###	Backward-compatible workaround
+- `getFov()` is now called twice in `GameRenderer.renderWorld`, the second call does not return the zoomed in fov. Use ordinal to target only the first call.

@@ -12,7 +12,14 @@ import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin
 {
-	@ModifyExpressionValue( method="renderWorld", at=@At(value="INVOKE", target="net/minecraft/client/render/GameRenderer.getFov (Lnet/minecraft/client/render/Camera;FZ)F") )
+	@ModifyExpressionValue(
+		method="renderWorld",
+		at=@At(
+			value = "INVOKE",
+			ordinal = 0,
+			target = "net/minecraft/client/render/GameRenderer.getFov (Lnet/minecraft/client/render/Camera;FZ)F"
+		)
+	)
 	private float ComputeTan(float fov){
 		ISeeYouOverThereMod.fovTan = CONFIG.fovScaling ? Math.tan(Math.toRadians(fov/2)) : 1;
 		return fov;
