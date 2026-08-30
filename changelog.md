@@ -9,3 +9,5 @@ Initial Release
 - Updated for MC 1.21.2
 ### 1.0.4
 - Fixed flickering entities in MC 1.21.6+
+### 1.0.5
+- Reduced number of divisions
