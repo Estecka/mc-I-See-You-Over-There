@@ -14,7 +14,14 @@ implements ModInitializer
 	static public final ConfigIO IO = new ConfigIO("ISeeYouOverThere.properties");
 	static public final Config CONFIG = new Config();
 
+	/**
+	 * The inverse of the FOV's tangent is basically the zoom multiplier.
+	 * When comparing  an object's distance  to the render distance, you can use
+	 * the  tangent  to either  multiply the  object's distance, or  divide  the
+	 * render distance.
+	 */
 	static public double fovTan = 1;
+	static public double fovTanInverse = 1;
 
 	@Override
 	public void onInitialize() {

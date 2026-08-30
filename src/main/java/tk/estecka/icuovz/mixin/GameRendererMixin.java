@@ -7,6 +7,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.render.GameRenderer;
 import tk.estecka.icuovz.ISeeYouOverThereMod;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
+import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 
 @Unique
 @Mixin(GameRenderer.class)
@@ -14,7 +15,14 @@ public abstract class GameRendererMixin
 {
 	@ModifyExpressionValue( method="renderWorld", at=@At(value="INVOKE", target="net/minecraft/client/render/GameRenderer.getFov (Lnet/minecraft/client/render/Camera;FZ)D") )
 	private double ComputeTan(double fov){
-		ISeeYouOverThereMod.fovTan = CONFIG.fovScaling ? Math.tan(Math.toRadians(fov/2)) : 1;
+		if (CONFIG.fovScaling){
+			ISeeYouOverThereMod.fovTan = Math.tan(Math.toRadians(fov/2));
+			ISeeYouOverThereMod.fovTanInverse = 1 / fovTan;
+		}
+		else {
+			ISeeYouOverThereMod.fovTan = 1;
+			ISeeYouOverThereMod.fovTanInverse = 1;
+		}
 		return fov;
 	}
 }
