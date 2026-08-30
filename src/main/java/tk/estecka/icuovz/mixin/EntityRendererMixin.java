@@ -10,7 +10,6 @@ import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-
 import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 
@@ -26,7 +25,6 @@ public class EntityRendererMixin<T extends Entity>
 		    ;
 	}
 
-	@Deprecated
 	// Scales render distance by virtually changing the distance from the entity to the camera
 	static private boolean ScaledShouldRender(Entity entity, double camX, double camY, double camZ, Operation<Boolean> original){
 		return original.call(
