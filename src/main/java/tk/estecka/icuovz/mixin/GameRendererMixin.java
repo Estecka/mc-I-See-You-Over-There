@@ -1,10 +1,14 @@
 package tk.estecka.icuovz.mixin;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.client.render.GameRenderer;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.minecraft.client.Camera;
+import net.minecraft.client.renderer.GameRenderer;
 import tk.estecka.icuovz.ISeeYouOverThereMod;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
@@ -13,16 +17,12 @@ import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin
 {
-	@ModifyExpressionValue(
-		method="renderWorld",
-		at=@At(
-			value = "INVOKE",
-			ordinal = 0,
-			target = "net/minecraft/client/render/GameRenderer.getFov (Lnet/minecraft/client/render/Camera;FZ)F"
-		)
-	)
-	private float ComputeTan(float fov){
+	private @Shadow @Final Camera mainCamera;
+
+	@Inject( method="extractCamera", at=@At("HEAD"))
+	private void ComputeTan(CallbackInfo ci){
 		if (CONFIG.fovScaling){
+			float fov = this.mainCamera.getFov();
 			ISeeYouOverThereMod.fovTan = Math.tan(Math.toRadians(fov/2));
 			ISeeYouOverThereMod.fovTanInverse = 1 / fovTan;
 		}
@@ -30,6 +30,5 @@ public abstract class GameRendererMixin
 			ISeeYouOverThereMod.fovTan = 1;
 			ISeeYouOverThereMod.fovTanInverse = 1;
 		}
-		return fov;
 	}
 }

@@ -5,10 +5,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.render.block.entity.BlockEntityRenderManager;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 
@@ -17,13 +17,19 @@ import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
  * mod "Enhanced Block Entities", which does the same thing but better.
  */
 @Unique
-@Mixin(BlockEntityRenderManager.class)
+@Mixin(BlockEntityRenderDispatcher.class)
 public class BlockEntityRendererManagerMixin
 {
-	@WrapOperation( method="getRenderState", at=@At(value="INVOKE", target="net/minecraft/client/render/block/entity/BlockEntityRenderer.isInRenderDistance (Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/util/math/Vec3d;)Z") )
-	private boolean AdjustRenderDistance(BlockEntityRenderer<?, ?> renderer, BlockEntity block, Vec3d camera, Operation<Boolean> original){
-		return block.getPos().getSquaredDistance(camera)*fovTan*fovTan <= CONFIG.blockMin*(double)CONFIG.blockMin
-		    || original.call(renderer, block,  block.getPos().toCenterPos().lerp(camera, fovTan))
+	@WrapOperation(
+		method = "tryExtractRenderState",
+		at = @At(
+			value = "INVOKE",
+			target = "net/minecraft/client/renderer/blockentity/BlockEntityRenderer.shouldRender (Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/phys/Vec3;)Z"
+		)
+	)
+	private boolean AdjustRenderDistance(BlockEntityRenderer<?, ?> renderer, BlockEntity block, Vec3 camera, Operation<Boolean> original){
+		return block.getBlockPos().distToCenterSqr(camera)*fovTan*fovTan <= CONFIG.blockMin*(double)CONFIG.blockMin
+		    || original.call(renderer, block, Vec3.atCenterOf(block.getBlockPos()).lerp(camera, fovTan))
 		    ;
 	}
 }

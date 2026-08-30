@@ -18,3 +18,10 @@ Initial Release
 ## 1.21.6
 ###	Backward-compatible workaround
 - `getFov()` is now called twice in `GameRenderer.renderWorld`, the second call does not return the zoomed in fov. Use ordinal to target only the first call.
+
+## 26.1
+- Mojmapocalypse
+
+## 26.2
+### Backward-compatible workaround
+- `BlockPos::getCenter` was removed. Use `Vec3::atCenterOf` instead.

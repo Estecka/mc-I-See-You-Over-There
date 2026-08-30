@@ -8,10 +8,11 @@ import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTanInverse;
 
 @Unique
-@Mixin(targets={"net/minecraft/server/world/ServerChunkLoadingManager$EntityTracker"})
+@Mixin(targets={"net/minecraft/server/level/ChunkMap$TrackedEntity"})
 public class ServerChunkLoadingManager_EntityTrackerMixin
 {
-	@ModifyReturnValue(method="adjustTrackingDistance", at=@At(value="RETURN"))
+	// Mojmap scaledRange == Yarn adjustTrackingDistance
+	@ModifyReturnValue(method="scaledRange", at=@At(value="RETURN"))
 	private int ClampMaxTrackingDistance(int original){
 		if (original >= CONFIG.entityMax)
 			return CONFIG.entityMax;

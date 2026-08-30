@@ -1,11 +1,11 @@
 package tk.estecka.icuovz.mixin;
 
+import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import net.minecraft.client.render.block.entity.BeaconBlockEntityRenderer;
 import tk.estecka.icuovz.ISeeYouOverThereMod;
 
-@Mixin(BeaconBlockEntityRenderer.class)
+@Mixin(BeaconRenderer.class)
 public class BeaconBlockEntityRendererMixin 
 {
 	/**
@@ -13,7 +13,7 @@ public class BeaconBlockEntityRendererMixin
 	 * @reason Vanilla method is a dumb constant; nothing to salvage there.
 	 */
 	@Overwrite
-	public int getRenderDistance(){
+	public int getViewDistance(){
 		return ISeeYouOverThereMod.CONFIG.beaconBeam;
 	}
 }

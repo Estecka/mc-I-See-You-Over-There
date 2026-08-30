@@ -6,10 +6,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.client.render.Frustum;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.CONFIG;
 import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 
@@ -22,9 +22,9 @@ import static tk.estecka.icuovz.ISeeYouOverThereMod.fovTan;
 @Mixin(EntityRenderer.class)
 public class EntityRendererMixin<T extends Entity>
 {
-	@WrapOperation( method="shouldRender", at=@At(value="INVOKE", target="net/minecraft/entity/Entity.shouldRender (DDD)Z") )
+	@WrapOperation( method="shouldRender", at=@At(value="INVOKE", target="net/minecraft/world/entity/Entity.shouldRender (DDD)Z") )
 	private boolean ClampRenderDistance(Entity entity, double camX, double camY, double camZ, Operation<Boolean> original, @Local(argsOnly=true) Frustum frustrum){
-		double sqrDist = entity.squaredDistanceTo(camX, camY, camZ);
+		double sqrDist = entity.distanceToSqr(camX, camY, camZ);
 		return sqrDist<=CONFIG.entityMax*(double)CONFIG.entityMax
 		    && ( sqrDist*fovTan*fovTan<=CONFIG.entityMin*(double)CONFIG.entityMin || ScaledShouldRender(entity,camX,camY,camZ,original) )
 		    ;
@@ -34,9 +34,9 @@ public class EntityRendererMixin<T extends Entity>
 	static private boolean ScaledShouldRender(Entity entity, double camX, double camY, double camZ, Operation<Boolean> original){
 		return original.call(
 			entity,
-			MathHelper.lerp(fovTan, entity.getX(), camX),
-			MathHelper.lerp(fovTan, entity.getY(), camY),
-			MathHelper.lerp(fovTan, entity.getZ(), camZ)
+			Mth.lerp(fovTan, entity.getX(), camX),
+			Mth.lerp(fovTan, entity.getY(), camY),
+			Mth.lerp(fovTan, entity.getZ(), camZ)
 		);
 	}
 
